@@ -17,6 +17,10 @@ body{
 header{
     width: 100vw;
 }
+.logo{
+    color: #fff;
+    font-size: 1.5rem;
+}
 nav{
     display: flex;
     justify-content: space-between;
