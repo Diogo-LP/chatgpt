@@ -24,7 +24,7 @@ header{
 nav{
     display: flex;
     justify-content: space-between;
-    padding: 1.2rem;
+    padding: .9rem;
     align-items: center;
     background-color: var(--main);
 }
@@ -39,16 +39,22 @@ main{
     border: 2px solid #000;
     border-radius: 20px;
     padding: 1rem;
-    width: 70%;
+    width: 55%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    box-shadow: 6px 6px 10px #0000005b;
 }
 .container div.title{
     font-size: 2.3rem;
     color: var(--main);
+}
+.chat{
+    padding: 1rem;
+    width: 100%;
+    min-height: 300px;
 }
 .input{
     display: flex;
@@ -63,6 +69,8 @@ main{
     padding: .5rem;
     width: 50%;
     border: 2px solid #000;
+    font-size: 1em;
+    letter-spacing: .5px;
 }
 button{
     padding: 0 .5rem;
