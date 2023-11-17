@@ -54,7 +54,8 @@ main{
 .chat{
     padding: 1rem;
     width: 100%;
-    min-height: 300px;
+    height: 300px;
+    max-height: 300px;
 }
 .input{
     display: flex;
