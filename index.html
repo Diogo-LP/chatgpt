@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/3143d98b09.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>Chat Gpt</title>
 </head>
 
@@ -15,7 +16,7 @@
             <div class="logo">DDHGPT</div>
             <div class="switch">
                 <label class="switch">
-                    <input type="checkbox">
+                    <input id="mode" type="checkbox">
                     <span class="slider"></span>
                 </label>
             </div>
@@ -50,6 +51,21 @@
     </main>
 </body>
 <script>
+    var mode = 0
+    var check = $("#mode")
+
+    check.on('click', function(){
+        if(mode == 0){
+            mode = 1
+            $("body").get(0).style.setProperty('--main', "#D02941")
+            $(".title").text("Bem Vindo ao TonyGPT")
+        }else{
+            mode=0
+            $("body").get(0).style.setProperty('--main', "#4D9CFA")
+            $(".title").text("Bem Vindo ao DDHGPT")
+
+        }
+    })
     
 </script>
 </html>

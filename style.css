@@ -93,6 +93,7 @@ main {
     border-radius: 20px;
     padding: .5rem 1rem;
     background-color: #00000018;
+    text-align: justify;
 }
 
 .msg .user {
