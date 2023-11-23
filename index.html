@@ -29,42 +29,103 @@
 
             <div id="chat" class="chat">
 
-                <div class="msg">
-                    <div class="content">
-                        <div class="txt">Como vai?</div>
-                        <div class="user"><i class="fa-regular fa-user"></i></div>
-                    </div>
-                </div>
-                <div class="msg r">
-                    <div class="content r">
-                        <div class="txt">Como vai?</div>
-                        <div class="user ddh">DDH</div>
-                    </div>
-                </div>
-                
-
             </div>
 
             <div class="input"><textarea placeholder="Digite Uma Mensagem" name="" id="qst"
-                    rows="1"></textarea><button><img src="Frame.png" alt=""></button> </div>
+                    rows="1"></textarea><button id="btn"><img src="Frame.png" alt=""></button> </div>
         </div>
     </main>
 </body>
 <script>
     var mode = 0
     var check = $("#mode")
+    var estilo = "DDH é um bot que tem a missão de ajudar todas as pessoas e preza sempre pelo respeito e pelo bom tratamento dos usuários"
+    var globalnome = "DDH"
 
+    
     check.on('click', function(){
         if(mode == 0){
             mode = 1
             $("body").get(0).style.setProperty('--main', "#D02941")
             $(".title").text("Bem Vindo ao TonyGPT")
+            $(".logo").text("TonyGPT")
+            estilo = "Tony é um bot extremamente agressivo que responde tudo xingando e ofendendo o usuário"
+            $("#chat").html("")
+            globalnome = "TONY"
+
+
         }else{
             mode=0
             $("body").get(0).style.setProperty('--main', "#4D9CFA")
             $(".title").text("Bem Vindo ao DDHGPT")
-
+            $(".logo").text("DDHGPT")
+            estilo = "DDH é um bot que tem a missão de ajudar todas as pessoas e preza sempre pelo respeito e pelo bom tratamento dos usuários"
+            $("#chat").html("")
+            globalnome = "DDH"
         }
+    })
+
+    $("#btn").on("click", async function(){
+        const url = "https://api.openai.com/v1/chat/completions"
+
+        let texto = $("#qst").val()
+        $("#qst").val("")
+
+        let pergunta = $("#chat").html()
+        pergunta += `
+                <div class="msg">
+                    <div class="content">
+                        <div class="txt">${texto}</div>
+                        <div class="user"><i class="fa-regular fa-user"></i></div>
+                    </div>
+                </div>
+        `
+        $("#chat").html(pergunta)
+
+        let key = "sk-ubveoZ@faNtPr@8bsQ8dj7@T3BlbkFJ@Hy3lhK2Y@drT14tB@3TxPT"
+        key = key.replaceAll("@", "")
+
+        const configuracoes = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + key
+            },
+            body: JSON.stringify({
+                model: "gpt-3.5-turbo",
+                messages: [
+                    {
+                        role: "system", 
+                        content: estilo
+                    },
+                    {
+                        role: "user",
+                        content: texto
+                    }
+                ]
+            })
+        }
+
+        let resposta = await fetch(url, configuracoes)
+        resposta = await resposta.json()
+
+        let valorRetorna = resposta.choices[0].message.content
+        
+        async function responder(){
+            let html = $("#chat").html()
+            html += `
+                <div class="msg r">
+                        <div class="content r">
+                            <div class="txt">${valorRetorna}</div>
+                            <div class="user ddh">${globalnome}</div>
+                        </div>
+                    </div>
+            `
+
+            $("#chat").html(html)
+        }
+
+        responder() 
     })
     
 </script>
